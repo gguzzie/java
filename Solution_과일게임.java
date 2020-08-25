@@ -10,7 +10,8 @@ import java.util.SortedSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
-public class Solution_°úÀÏ°ÔÀÓ {
+//20200825
+public class Solution_ê³¼ì¼ê²Œì„ {
 	static HashMap<Long, ArrayList<Fruit>> fruitList;
 	static ArrayList<Long> keyList;
 
@@ -31,9 +32,9 @@ public class Solution_°úÀÏ°ÔÀÓ {
 			fruitList = new HashMap<>();
 			keyList = new ArrayList<>();
 
-			//DP¸¦ À§ÇÑ º¯¼ö
+			//DPë¥¼ ìœ„í•œ ë³€ìˆ˜
 			long[] DP = new long[W+1];
-			//´ÙÀ½°ªÀ» ÀúÀåÇÏ±â À§ÇÑ º¯¼ö(DP)
+			//ë‹¤ìŒê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•œ ë³€ìˆ˜(DP)
 			long[] NEXT_DP = new long[W+1];
 
 			for (int i = 0; i < N; i++) {
@@ -43,17 +44,17 @@ public class Solution_°úÀÏ°ÔÀÓ {
 				long y = Long.parseLong(st.nextToken());
 				long v = Long.parseLong(st.nextToken());
 
-				//(*Áß¿ä) °úÀÏÀ» ÀÔ·Â¹ŞÀ»¶§, HashMap¿¡ ÀúÀåÇÏ´Â ÇÔ¼ö¸¦ È£ÃâÇÑ´Ù.
+				//(*ì¤‘ìš”) ê³¼ì¼ì„ ì…ë ¥ë°›ì„ë•Œ, HashMapì— ì €ì¥í•˜ëŠ” í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œë‹¤.
 				addFluit(new Fruit(x, y, v));
 			}
 
-			//KEY°ªÀ» ³·Àº ¼ø¼­ ºÎÅÍ Á¤·ÄÇÑ´Ù (TreeSetÀÌ¿ë)
+			//KEYê°’ì„ ë‚®ì€ ìˆœì„œ ë¶€í„° ì •ë ¬í•œë‹¤ (TreeSetì´ìš©)
 			SortedSet<Long> keys = new TreeSet<Long>(fruitList.keySet());
 
-			//ÇöÀç ³ôÀÌ
+			//í˜„ì¬ ë†’ì´
 			long currentKey = 0;
 
-			//³·Àº ³ôÀÌ(KEY)ºÎÅÍ ¼øÂ÷ÀûÀ¸·Î °Ë»öÀ» ½ÇÇàÇÑ´Ù.
+			//ë‚®ì€ ë†’ì´(KEY)ë¶€í„° ìˆœì°¨ì ìœ¼ë¡œ ê²€ìƒ‰ì„ ì‹¤í–‰í•œë‹¤.
 			for (Long key : keys) { 				
 				long nextKey = key;
 
@@ -62,8 +63,8 @@ public class Solution_°úÀÏ°ÔÀÓ {
 				long diff = nextKey - currentKey; 
 				currentKey = nextKey;
 
-				//(*Áß¿ä) 10^9¶ó´Â ³ôÀÌ¶§¹®¿¡ skipÀ» À§ÇÑ ±¸¹®
-				//W°ªÀÌ ³Ñ¾î°¡¸é ÇØ´ç ³ôÀÌÀÇ ÃÖ´ë°ªÀÌ ¸ğµç Ä­ÀÇ °ªµé¿¡ ¿µÇâÀ» ³¢Ä¡±â ¶§¹®¿¡ ÇØ´ç ·ÎÁ÷À» »ç¿ëÇÑ´Ù.
+				//(*ì¤‘ìš”) 10^9ë¼ëŠ” ë†’ì´ë•Œë¬¸ì— skipì„ ìœ„í•œ êµ¬ë¬¸
+				//Wê°’ì´ ë„˜ì–´ê°€ë©´ í•´ë‹¹ ë†’ì´ì˜ ìµœëŒ€ê°’ì´ ëª¨ë“  ì¹¸ì˜ ê°’ë“¤ì— ì˜í–¥ì„ ë¼ì¹˜ê¸° ë•Œë¬¸ì— í•´ë‹¹ ë¡œì§ì„ ì‚¬ìš©í•œë‹¤.
 				if(diff >= W) {
 					diff = W;
 					long max = 0;
@@ -74,14 +75,14 @@ public class Solution_°úÀÏ°ÔÀÓ {
 					Arrays.fill(NEXT_DP, max);
 					NEXT_DP[0] = 0;
 				}else {
-					//(*Áß¿ä) DP
-					//ÇØ´çÀ§Ä¡¿¡¼­ ÂüÁ¶°¡ °¡´ÉÇÑ ÃÖ°í°ªÀ» °¡Á®´Ù°¡ ÃÖ´ë°ªÀ» ÀúÀåÇÏ´Â ºÎºĞ
+					//(*ì¤‘ìš”) DP
+					//í•´ë‹¹ìœ„ì¹˜ì—ì„œ ì°¸ì¡°ê°€ ê°€ëŠ¥í•œ ìµœê³ ê°’ì„ ê°€ì ¸ë‹¤ê°€ ìµœëŒ€ê°’ì„ ì €ì¥í•˜ëŠ” ë¶€ë¶„
 					for (int i = 1; i <= W; i++) {
-						//ÀÌÀü°ª¿¡¼­ °¡Á®¿Ã¼ö ÀÖ´Â ¹üÀ§¸¦ ÁöÁ¤ÇÏ´Â º¯¼ö (startI, endI))
+						//ì´ì „ê°’ì—ì„œ ê°€ì ¸ì˜¬ìˆ˜ ìˆëŠ” ë²”ìœ„ë¥¼ ì§€ì •í•˜ëŠ” ë³€ìˆ˜ (startI, endI))
 						int startI = (int) ((i-diff <= 1) ? 1 : i-diff);
 						int endI = (int) ((i+diff >= W) ? W : i+diff);
 
-						//ÀÌÀü°ªÁß ÃÖ´ë°ª °Ë»ö(ÀÌ¶§ °¡´ÉÇÑ ¹üÀ§³»¿¡¼­¸¸ for¹®À» µ¹¸°´Ù)
+						//ì´ì „ê°’ì¤‘ ìµœëŒ€ê°’ ê²€ìƒ‰(ì´ë•Œ ê°€ëŠ¥í•œ ë²”ìœ„ë‚´ì—ì„œë§Œ forë¬¸ì„ ëŒë¦°ë‹¤)
 						for (int j = startI; j <= endI; j++) {
 							if(DP[j] == 0) {
 								continue;
@@ -91,7 +92,7 @@ public class Solution_°úÀÏ°ÔÀÓ {
 					}
 				}
 
-				//ÇöÀç³ôÀÌÀÇ °úÀÏÀÇ ¸¸Á·µµ¸¦ ¹Ù·Î Á÷Àü±îÁöÀÇ ÃÖ´ëÀÇ ¸¸Á·µµ¿¡´Ù°¡ °¢ À§Ä¡ÀÇ ¸¸Á·µµµéÀ» ´õÇÑ´Ù 
+				//í˜„ì¬ë†’ì´ì˜ ê³¼ì¼ì˜ ë§Œì¡±ë„ë¥¼ ë°”ë¡œ ì§ì „ê¹Œì§€ì˜ ìµœëŒ€ì˜ ë§Œì¡±ë„ì—ë‹¤ê°€ ê° ìœ„ì¹˜ì˜ ë§Œì¡±ë„ë“¤ì„ ë”í•œë‹¤ 
 				ArrayList<Fruit> list = fruitList.get(key);
 				for (int i = 0; i < list.size(); i++) {
 					NEXT_DP[list.get(i).x] += list.get(i).v;
@@ -101,7 +102,7 @@ public class Solution_°úÀÏ°ÔÀÓ {
 
 			}
 
-			//¸¶Áö¸· À§Ä¡·Î µµ´ŞÇÏ°í ³­ µÚ ÃÖ´ë°ªÀ» Ã£´Â´Ù
+			//ë§ˆì§€ë§‰ ìœ„ì¹˜ë¡œ ë„ë‹¬í•˜ê³  ë‚œ ë’¤ ìµœëŒ€ê°’ì„ ì°¾ëŠ”ë‹¤
 			long maxValue = 0;
 			for (int i = 1; i <= W; i++) {
 				maxValue = Math.max(maxValue, DP[i]);
@@ -110,9 +111,9 @@ public class Solution_°úÀÏ°ÔÀÓ {
 		}
 	}
 
-	//(*Áß¿ä)HashMap¿¡ °úÀÏÀ» ÀúÀåÇÑ´Ù
-	//ÇØ´çÇÔ¼ö¸¦ ¾²´Â ÀÌÀ¯´Â ³ôÀÌ¸¦ KEY·Î ¼³Á¤ÇÏ¿© °°Àº ³ôÀÌ³¢¸® °ªµéÀ» ¸ğÀ¸°í,
-	//¸ğÀº °ªÀ¸·Î ³·Àº ³ôÀÌºÎÅÍ °è»êÀ» ÁøÇàÇÒ ¶§, ¼øÂ÷ÀûÀ¸·Î °è»êÇÏ±â À§ÇØ ±×¿¡ ¾Ë¸Â°Ô ÇØ´ç °ªÀ» ÀúÀåÇÑ´Ù.
+	//(*ì¤‘ìš”)HashMapì— ê³¼ì¼ì„ ì €ì¥í•œë‹¤
+	//í•´ë‹¹í•¨ìˆ˜ë¥¼ ì“°ëŠ” ì´ìœ ëŠ” ë†’ì´ë¥¼ KEYë¡œ ì„¤ì •í•˜ì—¬ ê°™ì€ ë†’ì´ë¼ë¦¬ ê°’ë“¤ì„ ëª¨ìœ¼ê³ ,
+	//ëª¨ì€ ê°’ìœ¼ë¡œ ë‚®ì€ ë†’ì´ë¶€í„° ê³„ì‚°ì„ ì§„í–‰í•  ë•Œ, ìˆœì°¨ì ìœ¼ë¡œ ê³„ì‚°í•˜ê¸° ìœ„í•´ ê·¸ì— ì•Œë§ê²Œ í•´ë‹¹ ê°’ì„ ì €ì¥í•œë‹¤.
 	static void addFluit(Fruit f) {
 		if(fruitList.get(f.y) == null ) {
 			ArrayList<Fruit> list = new ArrayList<>();
