@@ -12,6 +12,7 @@ import java.util.TreeSet;
 
 //20200825
 //20200825 2번째 수정
+//20200826
 public class Solution_과일게임 {
 	static HashMap<Long, ArrayList<Fruit>> fruitList;
 	static ArrayList<Long> keyList;
